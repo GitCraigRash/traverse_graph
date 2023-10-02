@@ -1,0 +1,42 @@
+def traverse(graph, start):
+    '''
+    Returns a list of nodes in the order traversed from starting node using depth-first traversal. 
+
+    inputs:
+      graph - list of lists
+      start - integer
+
+    outputs:
+      history - list
+
+    example: 
+      graph = [[1],[2,3],[4],[],[0]], start = 0
+      history = [1, 2, 4, 0, 3]
+    '''
+    
+    def explore(start):
+        if adj_list[start] == []:
+            if start in history:
+                return None
+            history.append(start) 
+        for k in adj_list[start]:
+            if k in history:
+                continue
+            history.append(k)
+            start = k
+            explore(start)
+
+ 
+    history = []
+    if len(adj_list) == 1:
+        return [start]
+    if start not in adj_list[start]:
+       history.append(start)
+    for i in adj_list[start]:
+        if i in history:
+            continue
+        history.append(i) 
+        start = i
+        explore(start)
+    return history
+
